@@ -47,16 +47,24 @@ fun LoginScreen(
             )
 
             Button(onClick = {
-                viewModel.login(email, password) {
-                    if (it) navController.navigate("home")
+                viewModel.login(email, password) { success ->
+                    if (success) {
+                        navController.navigate("home") {
+                            popUpTo("login") { inclusive = true }
+                        }
+                    }
                 }
             }) {
                 Text("Iniciar Sesión")
             }
 
             Button(onClick = {
-                viewModel.register(email, password) {
-                    if (it) navController.navigate("home")
+                viewModel.register(email, password) { success ->
+                    if (success) {
+                        navController.navigate("home") {
+                            popUpTo("login") { inclusive = true }
+                        }
+                    }
                 }
             }) {
                 Text("Registrarse")
